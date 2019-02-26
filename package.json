@@ -2,10 +2,10 @@
   "name": "worker-scheduler",
   "version": "0.0.1",
   "description": "",
-  "main": "./lib/index.js",
-  "types": "index.d.ts",
+  "main": "./lib/worker-scheduler.js",
+  "types": "./lib/worker-scheduler.d.ts",
   "scripts": {
-    "test": "mocha"
+    "test": "nyc mocha"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +16,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nyc": "^13.3.0"
   },
   "dependencies": {
     "npmlog": "^4.1.2"

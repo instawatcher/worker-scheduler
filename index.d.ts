@@ -1,3 +1,0 @@
-export = Scheduler;
-
-// TODO: Typedefs
