@@ -84,6 +84,21 @@ declare namespace workerScheduler {
     /**
      * @private
      */
+    logListener(): void;
+
+    /**
+     * @private
+     */
+    finishListener(): void;
+
+    /**
+     * @private
+     */
+    errorListener(): void;
+
+    /**
+     * @private
+     */
     terminate(): void;
 
     /**
