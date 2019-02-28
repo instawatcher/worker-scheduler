@@ -1,6 +1,6 @@
 # worker-scheduler
   [![npm](https://img.shields.io/npm/v/worker-scheduler.svg)](https://www.npmjs.com/package/worker-scheduler)
-  [![Build Status](https://travis-ci.com/instawatcher/worker-scheduler.svg?branch=master)](https://travis-ci.com/instawatcher/worker-scheduler)
+  [![Build Status](https://travis-ci.org/instawatcher/worker-scheduler.svg?branch=master)](https://travis-ci.org/instawatcher/worker-scheduler)
   [![Maintainability](https://api.codeclimate.com/v1/badges/65a67d4434f0cabf6ec2/maintainability)](https://codeclimate.com/github/instawatcher/worker-scheduler/maintainability)
   [![Test Coverage](https://api.codeclimate.com/v1/badges/65a67d4434f0cabf6ec2/test_coverage)](https://codeclimate.com/github/instawatcher/worker-scheduler/test_coverage)
 
