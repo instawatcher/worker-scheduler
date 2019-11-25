@@ -15,7 +15,7 @@ declare namespace workerScheduler {
      * @param timeout The timeout for individual workers
      * @param masterTickInterval The interval, in which workers will be ticked
      */
-    constructor(timeout: number, masterTickInterval?: number): Scheduler;
+    constructor(timeout: number, masterTickInterval?: number);
   
     /**
      * Register a new worker under the given scheduler.
