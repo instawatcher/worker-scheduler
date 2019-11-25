@@ -71,8 +71,22 @@ it('should time out with toolong worker', (done) => {
   });
 }).timeout(6000);
 
+it('should kill worker post-resolution', (done) => {
+  const worker = new Worker('deferred_long', require.resolve('./assets/deferredlong'), 1000);
+
+  sched.addWorker(worker);
+  worker.once('launch', () => {
+    worker.once('error', (e) => {
+      assert.ok(e);
+      worker.deactivate();
+      done();
+    });
+    worker.once('finish', () => done(new Error('Worker finished successfully')));
+  });
+}).timeout(5000);
+
 it('should count workers', () => {
-  assert.strictEqual(sched.getWorkers().length, 4);
+  assert.strictEqual(sched.getWorkers().length, 5);
 });
 
 it('should shutdown master tick', () => {
