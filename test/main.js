@@ -21,7 +21,7 @@ it('should finish with normal worker', (done) => {
       assert.strictEqual(worker.getStatus(), 'FINISHED');
       done();
     });
-    worker.once('error', done);
+    worker.once('fail', done);
     worker.deactivate();
   });
 }).timeout(6000);
@@ -31,7 +31,7 @@ it('should throw error with error worker', (done) => {
 
   sched.addWorker(worker);
   worker.once('launch', () => {
-    worker.once('error', (e) => {
+    worker.once('fail', (e) => {
       assert.notStrictEqual(e.indexOf('imanerror'), -1);
       assert.strictEqual(worker.getStatus(), 'ERRORED');
       done();
@@ -46,7 +46,7 @@ it('should prematurely exit with premature worker', (done) => {
 
   sched.addWorker(worker);
   worker.once('launch', () => {
-    worker.once('error', (e) => {
+    worker.once('fail', (e) => {
       assert.strictEqual(e, 'TERM_UNEXPECTED');
       assert.strictEqual(worker.getStatus(), 'INACTIVE');
       done();
@@ -61,7 +61,7 @@ it('should time out with toolong worker', (done) => {
 
   sched.addWorker(worker);
   worker.once('launch', () => {
-    worker.once('error', (e) => {
+    worker.once('fail', (e) => {
       assert.strictEqual(e, 'TIMEOUT');
       assert.strictEqual(worker.getStatus(), 'ERRORED');
       worker.deactivate();
@@ -76,7 +76,7 @@ it('should kill worker post-resolution', (done) => {
 
   sched.addWorker(worker);
   worker.once('launch', () => {
-    worker.once('error', (e) => {
+    worker.once('fail', (e) => {
       assert.ok(e);
       worker.deactivate();
       done();
@@ -85,8 +85,18 @@ it('should kill worker post-resolution', (done) => {
   });
 }).timeout(5000);
 
+it('should not bubble error event', (done) => {
+  const worker = new Worker('test_error2', require.resolve('./assets/error'), 1000);
+
+  sched.addWorker(worker);
+  worker.once('launch', () => {
+    setTimeout(done, 2000);
+    worker.deactivate();
+  });
+}).timeout(6000);
+
 it('should count workers', () => {
-  assert.strictEqual(sched.getWorkers().length, 5);
+  assert.strictEqual(sched.getWorkers().length, 6);
 });
 
 it('should shutdown master tick', () => {
