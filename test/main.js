@@ -63,7 +63,7 @@ it('should time out with toolong worker', (done) => {
   worker.once('launch', () => {
     worker.once('fail', (e) => {
       assert.strictEqual(e, 'TIMEOUT');
-      assert.strictEqual(worker.getStatus(), 'ERRORED');
+      assert.strictEqual(worker.getStatus(), 'INACTIVE');
       worker.deactivate();
       done();
     });
@@ -83,7 +83,7 @@ it('should kill worker post-resolution', (done) => {
     });
     worker.once('finish', () => done(new Error('Worker finished successfully')));
   });
-}).timeout(5000);
+}).timeout(8000);
 
 it('should not bubble error event', (done) => {
   const worker = new Worker('test_error2', require.resolve('./assets/error'), 1000);
@@ -94,6 +94,12 @@ it('should not bubble error event', (done) => {
     worker.deactivate();
   });
 }).timeout(6000);
+
+it('should reactivate old worker', () => {
+  const worker = sched.getWorkerByName('test_normal');
+  worker.activate();
+  assert.strictEqual(worker.getStatus(), 'QUEUED');
+});
 
 it('should count workers', () => {
   assert.strictEqual(sched.getWorkers().length, 6);

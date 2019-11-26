@@ -63,23 +63,24 @@ declare namespace workerScheduler {
     lastRun: number;
 
     getStatus(): "INACTIVE" | "QUEUED" | "RUNNING" | "FINISHED" | "ERRORED";
+    activate(): void;
     deactivate(forceInactiveState: boolean): void;
     launch(): void;
     
     addListener(event: 'launch', listener: () => void): this;
     addListener(event: 'finish', listener: (returned: any) => void): this;
-    addListener(event: 'error', listener: (e: "TERM_UNEXPECTED" | "TIMEOUT") => void): this;
-    addListener(event: 'error', listener: (e: string) => void): this;
+    addListener(event: 'fail', listener: (e: "TERM_UNEXPECTED" | "TIMEOUT") => void): this;
+    addListener(event: 'fail', listener: (e: string) => void): this;
     
     on(event: 'launch', listener: () => void): this;
     on(event: 'finish', listener: (returned: any) => void): this;
-    on(event: 'error', listener: (e: "TERM_UNEXPECTED" | "TIMEOUT") => void): this;
-    on(event: 'error', listener: (e: string) => void): this;
+    on(event: 'fail', listener: (e: "TERM_UNEXPECTED" | "TIMEOUT") => void): this;
+    on(event: 'fail', listener: (e: string) => void): this;
 
     once(event: 'launch', listener: () => void): this;s
     once(event: 'finish', listener: (returned: any) => void): this;
-    once(event: 'error', listener: (e: "TERM_UNEXPECTED" | "TIMEOUT") => void): this;
-    once(event: 'error', listener: (e: string) => void): this;
+    once(event: 'fail', listener: (e: "TERM_UNEXPECTED" | "TIMEOUT") => void): this;
+    once(event: 'fail', listener: (e: string) => void): this;
     
     /**
      * @private
