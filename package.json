@@ -1,6 +1,6 @@
 {
   "name": "worker-scheduler",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Schedules and manages background workers",
   "main": "./lib/worker-scheduler.js",
   "types": "./lib/worker-scheduler.d.ts",
